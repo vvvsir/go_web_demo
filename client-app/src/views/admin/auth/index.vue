@@ -21,7 +21,13 @@
                 label="地址" />
             <el-table-column
                 prop="action"
-                label="请求方式" />
+                label="请求方式">
+                <template slot-scope="scope">
+                    <el-tag v-if="scope.row.action != ''" :type="getMethodTagType(scope.row.action)">
+                        {{ scope.row.action }}
+                    </el-tag>
+                </template>
+            </el-table-column>
             <el-table-column
                 prop="operation"
                 label="操作">
@@ -47,7 +53,32 @@ export default {
     data() {
         return {
             // 菜单表格结构数据
-            menusTable: []
+            menusTable: [],
+            defaultConfig: {
+                pageNum: 1,
+                pageSize: 5,
+                methods: [{
+                    name: 'get',
+                    label: 'GET[获取资源]',
+                    type: ''
+                }, {
+                    name: 'post',
+                    label: 'POST[创建资源]',
+                    type: 'success'
+                }, {
+                    name: 'put',
+                    label: 'PUT[创建/更新资源]',
+                    type: 'info'
+                }, {
+                    name: 'patch',
+                    label: 'PATCH[创建/更新资源(区别于PUT, 增量更新)]',
+                    type: 'warning'
+                }, {
+                    name: 'delete',
+                    label: 'DELETE[删除资源]',
+                    type: 'danger'
+                }]
+            }
         }
     },
     created() {
@@ -58,6 +89,16 @@ export default {
             let { data } = await authTree()
             data = removeEmptyChildren(data)
             this.menusTable = data
+        },
+        // 获取请求方式对应的tag颜色
+        getMethodTagType(method) {
+            for (let i = 0, len = this.defaultConfig.methods.length; i < len; i++) {
+                const item = this.defaultConfig.methods[i]
+                if (method === item.name) {
+                    return item.type
+                }
+            }
+            return ''
         },
         tips() {
             Message({
