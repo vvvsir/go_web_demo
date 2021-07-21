@@ -11,7 +11,6 @@ definitions:
         type: string
       verify_code:
         description: 验证码
-        example: "9527"
         type: string
     required:
     - password
@@ -118,7 +117,7 @@ definitions:
         type: integer
       tel:
         description: 电话号码
-        example: "13054174174"
+        example: "13088888888"
         type: string
       user_name:
         description: 账号
@@ -155,7 +154,7 @@ definitions:
         type: integer
       tel:
         description: 电话号码
-        example: "13054174174"
+        example: "13088888888"
         type: string
       user_name:
         description: 账号
@@ -369,6 +368,18 @@ paths:
       summary: 获取权限树
       tags:
       - 角色
+  /auth/treemenu:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RolePage'
+      summary: 获取权限树
+      tags:
+      - 权限
   /captcha:
     get:
       responses:

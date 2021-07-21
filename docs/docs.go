@@ -195,6 +195,25 @@ var doc = `{
                 }
             }
         },
+        "/auth/treemenu": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "权限"
+                ],
+                "summary": "获取权限树",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.RolePage"
+                        }
+                    }
+                }
+            }
+        },
         "/captcha": {
             "get": {
                 "tags": [
@@ -393,8 +412,7 @@ var doc = `{
                 },
                 "verify_code": {
                     "description": "验证码",
-                    "type": "string",
-                    "example": "9527"
+                    "type": "string"
                 }
             }
         },
@@ -529,7 +547,7 @@ var doc = `{
                 "tel": {
                     "description": "电话号码",
                     "type": "string",
-                    "example": "13054174174"
+                    "example": "13088888888"
                 },
                 "user_name": {
                     "description": "账号",
@@ -576,7 +594,7 @@ var doc = `{
                 "tel": {
                     "description": "电话号码",
                     "type": "string",
-                    "example": "13054174174"
+                    "example": "13088888888"
                 },
                 "user_name": {
                     "description": "账号",
